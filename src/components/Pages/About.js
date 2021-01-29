@@ -5,13 +5,6 @@ export default class About extends Component {
     render() {
         return (
             <div>
-                <Header 
-                    title = "Welcome To Our Studio!"
-                    subtitle = "Nice To Meet You"
-                    buttonText = "Tell Me More"
-                    link = "/service"
-                    showButton ={false}
-                />
                 <section class="page-section" id="about">
                     <div class="container">
                         <div class="text-center">

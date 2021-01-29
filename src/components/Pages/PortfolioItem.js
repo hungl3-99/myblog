@@ -9,11 +9,11 @@ export default class PortfolioItem extends Component {
                         <div className="portfolio-hover">
                             <div className="portfolio-hover-content"><i className="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img className="img-fluid" src="assets/img/portfolio/01-thumbnail.jpg" alt="" />
+                        <img className="img-fluid" src={this.props.image} alt="" />
                     </a>
                     <div className="portfolio-caption">
-                        <div className="portfolio-caption-heading">Threads</div>
-                        <div className="portfolio-caption-subheading text-muted">Illustration</div>
+                        <div className="portfolio-caption-heading">{this.props.title}</div>
+                        <div className="portfolio-caption-subheading text-muted">{this.props.subtitle}</div>
                     </div>
                 </div>
             </div>
