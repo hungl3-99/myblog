@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 export default class Header extends Component {
     render(){
         return (
-            <div>
                 <header className="masthead" style={{backgroundImage : this.props.image}}>
                     <div className="container">
                         <div className="masthead-subheading">{this.props.title}</div>
@@ -13,7 +12,6 @@ export default class Header extends Component {
                         }
                     </div>
                 </header>
-            </div>
         )
     }
 }

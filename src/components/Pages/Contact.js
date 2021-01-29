@@ -15,7 +15,7 @@ class Contact extends Component {
 
         this.HandleChangeEvent = this.HandleChangeEvent.bind(this)
     }
-
+    
     HandleChangeEvent(e) {
         this.setState({
             [e.target.id]: e.target.value
