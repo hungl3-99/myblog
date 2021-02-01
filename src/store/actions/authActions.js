@@ -4,10 +4,11 @@ import API from '../../api/api';
 export const login = (email , pass ) => {
     return(dispatch) => {
         API.login(email , pass , res => {
-            return {
+            console.log("result" , res.data)
+            dispatch({
                 type : 'LOGIN',
                 payload : { email , pass }
-            }
+            })
         })
     }
     /*return {
