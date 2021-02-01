@@ -1,31 +1,34 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+import * as authActions from '../../store/actions/authActions'
+class LoginForm extends Component {
+    onHandleSubmit = (email, pass) => {
+        this.props.login(email, pass)
+    }
 
-export default class LoginForm extends Component {
+
     render() {
         return (
             <div>
                 <div className="container-fluid">
                     <div className="row no-gutter">
-
                         <div className="col-md-6 d-none d-md-flex bg-image"></div>
-
-
-
                         <div className="col-md-6 bg-light">
                             <div className="login d-flex align-items-center py-5">
-
-
                                 <div className="container">
                                     <div className="row">
                                         <div className="col-lg-10 col-xl-7 mx-auto">
                                             <h3 className="display-4">Login!</h3>
                                             <p className="text-muted mb-4">Please enter your email and password.</p>
-                                            <form>
+                                            <form onSubmit={e => {
+                                                e.preventDefault();
+                                                this.props.login(document.getElementById("email").value, document.getElementById("pass").value)
+                                            }}>
                                                 <div className="form-group mb-3">
-                                                    <input id="inputEmail" type="email" placeholder="Email address" required="" autofocus="" className="form-control rounded-pill border-0 shadow-sm px-4" />
+                                                    <input id="inputEmail" id="email" type="email" placeholder="Email address" required="" autofocus="" className="form-control rounded-pill border-0 shadow-sm px-4" />
                                                 </div>
                                                 <div className="form-group mb-3">
-                                                    <input id="inputPassword" type="password" placeholder="Password" required="" className="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
+                                                    <input id="inputPassword" id="pass" type="password" placeholder="Password" required="" className="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
                                                 </div>
                                                 <div className="custom-control custom-checkbox mb-3">
                                                     <input id="customCheck1" type="checkbox" checked className="custom-control-input" />
@@ -46,3 +49,20 @@ export default class LoginForm extends Component {
         )
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        login: (email, pass) => {
+            console.log(email, pass)
+            dispatch(authActions.login(email, pass))
+        }
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
