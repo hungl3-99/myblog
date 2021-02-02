@@ -1,20 +1,16 @@
 import API from '../../api/api';
 
 
-export const login = (email , pass ) => {
+export const login = (email , pass , token) => {
     return(dispatch) => {
         API.login(email , pass , res => {
             console.log("result" , res.data)
             dispatch({
                 type : 'LOGIN',
-                payload : { email , pass }
+                payload : { email , token : res.data.token}
             })
         })
     }
-    /*return {
-        type : 'LOGIN',
-        payload : { email , pass }
-    }*/
 }
 
 export const register = (email , pass ) => {
