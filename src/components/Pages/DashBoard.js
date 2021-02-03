@@ -1,104 +1,59 @@
-import React, { Component } from 'react'
-import {withRouter} from 'react-router-dom'
-import { connect } from 'react-redux';
-import AppBar from "@material-ui/core/AppBar"
-import  Toolbar  from '@material-ui/core/Toolbar'
-import classNames from 'classnames'
-import { Drawer, IconButton, List, ListItem, Typography, withStyles } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu'
-import ChervonLeftIcon from '@material-ui/icons/ChevronLeft'
-import Divider from '@material-ui/core/Divider'
-const drawerWidth = 240 ;
-const styles = theme => ({
-    toolbar : {
-        paddingRight : 24
-    }, 
-    drawerPaper : {
-        position : 'relative',
-        whiteSpace : 'noWrap',
-        width : drawerWidth
-    },
-    appBar : {
-        //zIndex : theme.zIndex.drawer + 1,
-        transition : theme.transitions.create(['width' , 'margin'], {
-            easing : theme.transitions.easing.sharp,
-            duration : theme.transitions.duration.leavingScreen,
-            zIndex : theme.zIndex.drawer + 1
-        })
-    },
-    
-    appBarShift : {
-        marginLeft : drawerWidth,
-        width : `calc(100% - ${drawerWidth}px)`,
-        transition : theme.transitions.create(['width' , 'margin'], {
-            easing : theme.transitions.easing.sharp,
-            duration : theme.transitions.duration.enteringScreen,
-        })
-    },
-    toolbarIcon : {
-        display : 'flex',
-        alignItems : 'center',
-        justifyContent : 'flex-end',
-        padding: '0 8px',
-        ...theme.mixins.toolbar
-    }
-})
-class DashBoard extends Component {
-    constructor(props){
-        super(props)
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import 'antd/dist/antd.css';
+import './index.css';
+import { Layout, Menu, Breadcrumb } from 'antd';
+import { UserOutlined, LogoutOutlined , AppstoreOutlined } from '@ant-design/icons';
+import {Link} from 'react-router-dom'
+import About from './About'
+import { AppBar } from '@material-ui/core';
 
-        this.state = {
-            open : true
-        }
-    }
-    handleDrawerOpen = (e) => {
-        this.setState({open : !this.state.open})
-    }
-    render(){
-        const {classes} = this.props;
+const { SubMenu } = Menu;
+const { Header, Content, Footer, Sider } = Layout;
+
+export default class DashBoard extends Component {
+    render() {
         return (
-            <div>
-            <AppBar className={classes.appBar}>
-                <Toolbar className={classNames(classes.appBar ,this.state.open && classes.appBarShift)}>
-                    <IconButton onClick ={this.handleDrawerOpen}>
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography
-                        component = "h1"
-                        variant = "h6"
-                        color="inherit"
-                        noWrap
-                    >
-                        Admin
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer variant="permanent" open={true} classes={{paper : classes.drawerPaper}}>
-                <div className={classes.toolbarIcon}>
-                    <IconButton onClick={this.handleDrawerOpen} >
-                        <ChervonLeftIcon />
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>
-                    <ListItem>
-                        DashBoard
-                    </ListItem>
-                </List>
-            </Drawer>
+            <div className="Dashboard">
+                <Header className="header">
+                    <Menu theme="dark" mode="horizontal">
+                        <Menu.Item key="1">DashBoard</Menu.Item>
+                        <Menu.Item key="2">Setting</Menu.Item>
+                        <Menu.Item key="3">Account</Menu.Item>
+                    </Menu>
+                </Header>
+                <Content style={{ padding: '0 50px' }}>
+                    <Breadcrumb style={{ margin: '16px 0' }}>
+                        <Breadcrumb.Item>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item>DashBoard</Breadcrumb.Item>
+                    </Breadcrumb>
+                    <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
+                        <Sider className="site-layout-background" width={200}>
+                            <Menu
+                                mode="inline"
+                                defaultOpenKeys={['sub1']}
+                                style={{ height: '100%' }}
+                            >
+                                <SubMenu key="sub1" icon={<AppstoreOutlined />} title="App">
+                                    <Menu.Item key="1"><Link to = "/">Main</Link></Menu.Item>
+                                    <Menu.Item key="2"><Link to = "/admin">Dashboard</Link></Menu.Item>
+                                    <Menu.Item key="3">Post</Menu.Item>
+                                </SubMenu>
+                                <SubMenu key="sub2" icon={<UserOutlined />} title="Users">
+                                    <Menu.Item key="4">Profile</Menu.Item>
+                                </SubMenu>
+
+                                <Menu.Item key="5" icon={<LogoutOutlined />}>Log Out</Menu.Item>
+
+
+                            </Menu>
+                        </Sider>
+                        <Content style={{ padding: '0 24px', minHeight: 280 }}>Content</Content>
+                    </Layout>
+                </Content>
+
             </div>
+
         )
     }
 }
-
-const mapStateToProps = state => {
-    return {
-      auth : state.auth
-    }
-  }
-  
-  const mapDispatchToProps = dispatch => {
-    
-  }
-
-  export default connect(mapStateToProps , mapDispatchToProps)(withRouter(withStyles(styles)(DashBoard)))
