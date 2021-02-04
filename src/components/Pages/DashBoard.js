@@ -37,10 +37,10 @@ export default class DashBoard extends Component {
                                 <SubMenu key="sub1" icon={<AppstoreOutlined />} title="App">
                                     <Menu.Item key="1"><Link to = "/">Main</Link></Menu.Item>
                                     <Menu.Item key="2"><Link to = "/admin">Dashboard</Link></Menu.Item>
-                                    <Menu.Item key="3">Post</Menu.Item>
+                                    <Menu.Item key="3"><Link to = "/admin/post">Post</Link></Menu.Item>
                                 </SubMenu>
                                 <SubMenu key="sub2" icon={<UserOutlined />} title="Users">
-                                    <Menu.Item key="4">Profile</Menu.Item>
+                                    <Menu.Item key="4"><Link to = "/admin/users">Profile</Link></Menu.Item>
                                 </SubMenu>
 
                                 <Menu.Item key="5" icon={<LogoutOutlined />}>Log Out</Menu.Item>
@@ -48,7 +48,7 @@ export default class DashBoard extends Component {
 
                             </Menu>
                         </Sider>
-                        <Content style={{ padding: '0 24px', minHeight: 280 }}>Content</Content>
+                        <Content style={{ padding: '0 24px', minHeight: 280 }}>{this.props.children}</Content>
                     </Layout>
                 </Content>
 

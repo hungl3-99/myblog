@@ -5,13 +5,8 @@ import  Toolbar  from '@material-ui/core/Toolbar'
 export default class AdminWrapper extends Component {
     render(){
         return (
-        <div id = "admin-page">
-            <AppBar>
-                <Toolbar>
-                    {this.props.children}
-                </Toolbar>
-            </AppBar>
-            
+        <div id = "admin-page">         
+            {this.props.children}
         </div>
         )
     }
