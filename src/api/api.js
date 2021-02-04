@@ -7,6 +7,9 @@ const API = {
         axios.post(`${host}/user/login` , {email : email , password : pass }).then(res => {
             success(res)
         })
+    },
+    getUsers : (token , success ) => {
+        axios.post()
     }
 }
 
